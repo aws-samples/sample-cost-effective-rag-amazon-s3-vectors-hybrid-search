@@ -1,0 +1,11 @@
+# Bundled into the Lambda deployment package for all three functions.
+#
+# boto3 is pinned explicitly (instead of relying on the Lambda-managed SDK)
+# because the s3vectors client and the newest Bedrock Converse features
+# require a recent botocore. The s3vectors client was introduced in boto3
+# 1.39.5. 1.40.0 has no QueryVectors pagination (nextToken), hence the
+# 100-result cap in search/dense_search.py.
+boto3==1.40.0
+
+# PDF text extraction (pure Python, no native wheels -> portable bundling).
+pypdf==6.21.4

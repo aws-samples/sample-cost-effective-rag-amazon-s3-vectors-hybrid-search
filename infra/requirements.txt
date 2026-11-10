@@ -1,0 +1,7 @@
+# AWS CDK v2 application dependencies (Python).
+# The aws_s3vectors L1 constructs (AWS::S3Vectors::VectorBucket /
+# AWS::S3Vectors::Index) first shipped in aws-cdk-lib 2.223.0; the knowledge
+# base stack's S3 Vectors storage configuration (S3VectorsConfigurationProperty)
+# needs 2.230.0 or later. Tested with the 2.268.0 pin below.
+aws-cdk-lib==2.268.0
+constructs==10.8.1

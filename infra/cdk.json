@@ -1,0 +1,19 @@
+{
+  "app": "python3 app.py",
+  "watch": {
+    "include": ["**"],
+    "exclude": ["README.md", "cdk*.json", "**/__pycache__", "tests"]
+  },
+  "context": {
+    "prefix": "hybrid-rag",
+    "enable_knowledge_base": false,
+    "embedding_model_id": "amazon.titan-embed-text-v2:0",
+    "embedding_dimensions": 1024,
+    "generation_model_id": "us.anthropic.claude-sonnet-4-6",
+    "vector_index_name": "chunks",
+    "kb_vector_index_name": "kb-chunks",
+    "api_throttle_rate": 10,
+    "api_throttle_burst": 20,
+    "api_monthly_quota": 50000
+  }
+}

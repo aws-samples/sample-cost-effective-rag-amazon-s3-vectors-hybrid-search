@@ -1,0 +1,195 @@
+<mxfile host="app.diagrams.net" agent="kiro" version="24.7.7" type="device">
+  <diagram id="s3v-hybrid-rag" name="architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1130" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="t-title" value="Build cost-effective RAG architectures using Amazon S3 Vectors — hybrid retrieval (dense + BM25 → RRF) with Amazon Bedrock generation" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="200" y="10" width="1360" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- AWS Cloud + Region frames -->
+        <mxCell id="f-cloud" value="AWS Cloud" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=0;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="60" width="1360" height="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="f-region" value="AWS Region (CDK default Region; us-east-1 if unset)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=0;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#00A4A6;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#00A4A6;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="100" width="1300" height="930" as="geometry" />
+        </mxCell>
+
+        <!-- Stack group frames -->
+        <mxCell id="f-api" value="hybrid-rag-api" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#5A6C86;verticalAlign=top;align=left;spacing=8;fontStyle=1;fontSize=12;fontColor=#5A6C86;container=0;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="180" width="190" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="f-compute" value="hybrid-rag-compute" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#5A6C86;verticalAlign=top;align=left;spacing=8;fontStyle=1;fontSize=12;fontColor=#5A6C86;container=0;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="140" width="510" height="790" as="geometry" />
+        </mxCell>
+        <mxCell id="f-hybrid" value="" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#D05C17;dashed=1;container=0;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="530" y="165" width="190" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="f-vector" value="hybrid-rag-vector-store" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#5A6C86;verticalAlign=top;align=left;spacing=8;fontStyle=1;fontSize=12;fontColor=#5A6C86;container=0;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="140" width="220" height="245" as="geometry" />
+        </mxCell>
+        <mxCell id="f-bedrock" value="Amazon Bedrock (service)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#01A88D;verticalAlign=top;align=left;spacing=8;fontStyle=1;fontSize=12;fontColor=#01A88D;container=0;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="400" width="220" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="f-kb" value="hybrid-rag-knowledge-base — optional (-c enable_knowledge_base=true)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#7D8998;verticalAlign=top;align=left;spacing=8;fontStyle=1;fontSize=11;fontColor=#7D8998;container=0;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="140" width="205" height="790" as="geometry" />
+        </mxCell>
+
+        <!-- Actors (outside cloud) -->
+        <mxCell id="n-client" value="API client" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.users;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="t-clientnote" value="answers return with citations&#10;(buffered JSON)" style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontStyle=2;fontColor=#5A6C86;" vertex="1" parent="1">
+          <mxGeometry x="10" y="345" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n-author" value="Document owner" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.users;" vertex="1" parent="1">
+          <mxGeometry x="40" y="620" width="78" height="78" as="geometry" />
+        </mxCell>
+
+        <!-- Resource icons -->
+        <mxCell id="i-apigw" value="Amazon API Gateway&lt;br&gt;REST · x-api-key · usage plan&lt;br&gt;JSON Schema validation&lt;br&gt;(incl. tenant_id pattern)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F54749;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;" vertex="1" parent="1">
+          <mxGeometry x="326" y="240" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-search" value="Search Lambda&lt;br&gt;POST /search&lt;br&gt;dense | sparse | hybrid" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="1">
+          <mxGeometry x="590" y="200" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-query" value="Query Lambda&lt;br&gt;POST /query&lt;br&gt;hybrid retrieval + generation" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="1">
+          <mxGeometry x="590" y="400" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="t-hybridnote" value="&lt;b&gt;Shared hybrid search (in-process)&lt;/b&gt;&lt;br&gt;tenant_id: trim + lowercase,&lt;br&gt;blank → default, invalid → 400&lt;br&gt;embed → dense + BM25 → RRF (k=60)" style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontStyle=2;fontColor=#5A6C86;" vertex="1" parent="1">
+          <mxGeometry x="535" y="525" width="180" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="i-ddb" value="Amazon DynamoDB&lt;br&gt;BM25 postings,&lt;br&gt;tenant stats,&lt;br&gt;doc manifests&lt;br&gt;(tenant-prefixed keys)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#4D72F3;gradientDirection=north;fillColor=#3334B9;strokeColor=#ffffff;dashed=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;align=left;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="1">
+          <mxGeometry x="830" y="290" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-docs" value="Docs bucket (Amazon S3)&lt;br&gt;.pdf .txt .md .markdown .html .htm&lt;br&gt;(all lowercase or all uppercase)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="1">
+          <mxGeometry x="590" y="620" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-ingest" value="Ingestion Lambda&lt;br&gt;parse → chunk (~512 tokens,&lt;br&gt;12.5% overlap) → embed → index&lt;br&gt;on delete: manifest cleanup" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="1">
+          <mxGeometry x="830" y="620" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-logs" value="Amazon CloudWatch Logs&lt;br&gt;3 log groups, 2-week retention&lt;br&gt;names exported as stack outputs" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F34482;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;align=left;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch_2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="785" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="i-s3v" value="Amazon S3 Vectors&lt;br&gt;vector bucket · chunks index&lt;br&gt;1024d cosine · chunk text in&lt;br&gt;non-filterable metadata" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="1">
+          <mxGeometry x="1131" y="180" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-claude" value="Claude Sonnet 4.6&lt;br&gt;cross-Region inference profile&lt;br&gt;us.anthropic.claude-sonnet-4-6" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#4AB29A;gradientDirection=north;fillColor=#116D5B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;" vertex="1" parent="1">
+          <mxGeometry x="1131" y="431" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-titan" value="Titan Text Embeddings V2&lt;br&gt;1024 dimensions" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#4AB29A;gradientDirection=north;fillColor=#116D5B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;" vertex="1" parent="1">
+          <mxGeometry x="1131" y="600" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-kb" value="Bedrock Knowledge Base&lt;br&gt;semantic-only baseline&lt;br&gt;for comparison" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#4AB29A;gradientDirection=north;fillColor=#116D5B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;" vertex="1" parent="1">
+          <mxGeometry x="1373" y="240" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-kbidx" value="kb-chunks index&lt;br&gt;(same vector bucket)&lt;br&gt;AMAZON_BEDROCK_TEXT +&lt;br&gt;AMAZON_BEDROCK_METADATA&lt;br&gt;non-filterable keys" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="1">
+          <mxGeometry x="1373" y="470" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="i-apilogs" value="API access logs&lt;br&gt;(Amazon CloudWatch Logs)&lt;br&gt;JSON, incl. API key ID&lt;br&gt;2-week retention" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F34482;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch_2;" vertex="1" parent="1">
+          <mxGeometry x="341" y="440" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="i-sqs" value="Ingestion failure queue (Amazon SQS)&lt;br&gt;SSE-SQS · SSL enforced&lt;br&gt;14-day retention" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#F54749;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;labelPosition=left;verticalLabelPosition=middle;verticalAlign=middle;align=right;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" vertex="1" parent="1">
+          <mxGeometry x="946" y="864" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- Ingestion and delete flow edges (green, lettered) -->
+        <mxCell id="e-ia" value="A. upload or delete&lt;br&gt;tenants/&amp;lt;tenant_id&amp;gt;/…&lt;br&gt;(invalid folder: rejected)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-author" target="i-docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ib" value="B. ObjectCreated /&lt;br&gt;ObjectRemoved" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-docs" target="i-ingest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ic" value="C. embed chunks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-ingest" target="i-titan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-id" value="D. PutVectors / DeleteVectors" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-ingest" target="i-s3v">
+          <mxGeometry x="-0.4" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="635.6" />
+              <mxPoint x="1040" y="238.5" />
+            </Array>
+            <mxPoint as="offset" x="-82" y="0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ie" value="E. postings + stats&lt;br&gt;(removed on delete)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-ingest" target="i-ddb">
+          <mxGeometry x="0.587" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ifail" value="on failure after&lt;br&gt;2 retries" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#277116;fontColor=#277116;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-ingest" target="i-sqs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="686.3" />
+            </Array>
+            <mxPoint as="offset" x="0" y="64" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Query flow edges (dark, numbered) -->
+        <mxCell id="e-q1" value="1. POST /search | /query&lt;br&gt;x-api-key" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="n-client" target="i-apigw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-q2a" value="2a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-apigw" target="i-search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-q2b" value="2b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-apigw" target="i-query">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-q4a" value="4a. QueryVectors (top-k ≤ 100, tenant filter)&lt;br&gt;+ GetVectors for keyword-only hits" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=1;exitY=0.128571;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="f-hybrid" target="i-s3v">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-q4b" value="4b. BM25&lt;br&gt;term queries" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=1;exitY=0.390476;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="f-hybrid" target="i-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-q3" value="3. embed query" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.904762;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="f-hybrid" target="i-titan">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1075" y="545" />
+              <mxPoint x="1075" y="619.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-q5" value="5. Converse (maxTokens set)&lt;br&gt;→ answer + citations" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.897436;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-query" target="i-claude">
+          <mxGeometry x="0.15" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-alog" value="access logs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#232F3E;fontColor=#232F3E;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-apigw" target="i-apilogs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="282" y="306.3" />
+              <mxPoint x="282" y="464" />
+            </Array>
+            <mxPoint as="offset" x="36" y="12" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Optional KB edges (dashed grey) -->
+        <mxCell id="e-k1" value="KB data source (docs bucket) · dataDeletionPolicy=RETAIN" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#7D8998;fontColor=#7D8998;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-docs" target="f-kb">
+          <mxGeometry x="0.1" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="526" y="686.3" />
+              <mxPoint x="526" y="960" />
+              <mxPoint x="1412.5" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-k2" value="sync: chunk → embed&lt;br&gt;(Titan) → write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;fontSize=11;labelBackgroundColor=#FFFFFF;strokeColor=#7D8998;fontColor=#7D8998;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i-kb" target="i-kbidx">
+          <mxGeometry x="0.15" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1325" y="279" />
+              <mxPoint x="1325" y="509" />
+            </Array>
+            <mxPoint as="offset" x="68" y="0" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="t-legend" value="&lt;b&gt;Legend&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#232F3E&quot;&gt;━━&lt;/font&gt; query flow (1–5)&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#277116&quot;&gt;━━&lt;/font&gt; ingestion and delete flow (A–E)&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#7D8998&quot;&gt;╌╌&lt;/font&gt; optional knowledge base baseline" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#232F3E;strokeColor=#D5DBDB;fillColor=#FFFFFF;rounded=0;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="270" y="980" width="700" height="36" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

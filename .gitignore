@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# CDK
+infra/cdk.out/
+cdk.out/
+.cdk.staging/
+cdk.context.json
+
+# Node (CDK CLI helper installs)
+node_modules/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Local env
+.env
+
+# Local build artifacts
+build/
+# Local working notes (may contain account IDs; never publish)
+.agents/
+# APG pattern draft: the published version lives on the APG site
+docs/apg-pattern.md
+# ASH security scanner config/output (contains internal URLs; never publish)
+.ash/
+ash-scan-output-*/

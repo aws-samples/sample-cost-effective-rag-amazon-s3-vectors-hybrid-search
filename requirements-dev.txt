@@ -1,0 +1,11 @@
+# Development / test dependencies for the whole repository.
+# Lambda runtime dependencies live in src/requirements.txt.
+# CDK app dependencies live in infra/requirements.txt.
+
+pytest==9.2.0
+
+# Needed so unit tests can import Lambda modules and CDK stacks locally.
+boto3==1.40.0
+pypdf==6.21.4
+aws-cdk-lib==2.268.0
+constructs==10.8.1
